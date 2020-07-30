@@ -1,0 +1,26 @@
+.item{
+    margin-top: 10px;
+    border: 1px solid brown;
+    border-radius: 5px;
+    mat-card{
+        display: flex;
+        flex-direction: row;
+        mat-card-content{                    
+            display: inline-block;
+            width: 80%;                                        
+        }
+        mat-card-actions{                    
+            padding-top: 0px;
+            .action-btn{
+                display: inline;
+                margin-left: 5px;
+                button{
+                    background: #f44336;
+                    border: none;
+                    color: white;
+                    border-radius: 4px;
+                }
+            }                    
+        }
+    }
+}

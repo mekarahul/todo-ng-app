@@ -8,20 +8,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { TaskComponent } from './task/task.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AddIconComponent } from './add-icon/add-icon.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EditIconComponent } from './edit-icon/edit-icon.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoryListComponent,
-    TaskComponent
+    TaskComponent,
+    AddIconComponent,
+    EditIconComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

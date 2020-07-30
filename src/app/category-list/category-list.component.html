@@ -1,17 +1,46 @@
-<div class="cardList">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image">
-            <mat-card-title>{{categoryTitle}}</mat-card-title>
-            </div>
-        </mat-card-header>
-        <mat-card-content>
-            <ng-container *ngFor="let task of tasks">
-                <app-task [taskDescription]="task.description" [categoryId]="task.categoryId"></app-task>
-            </ng-container>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-button (click)= "addTask(categoryId)">Add a card</button>
-        </mat-card-actions>
-    </mat-card>
+<div cdkDropListGroup>
+<ng-container *ngFor="let category of list; let i = index">
+<div class="list-container" cdkDropList id="{{category.id}}" 
+[cdkDropListData] = "category.todos" (cdkDropListDropped)="drop($event)"
+>
+    <h1><span class="list-title">{{category.title}}</span></h1>
+    <ng-container *ngFor="let todo of category.todos">
+        <app-task [description] = "todo.description" [listId] = "todo.listId" cdkDrag [cdkDragData]></app-task>
+    </ng-container>
+    <div class="list-action">        
+      <button mat-mini-fab color="warn" aria-label="plus icon">
+        <app-add-icon></app-add-icon>
+      </button>
+    </div>
+  </div>
+</ng-container>
 </div>
+<!--
+<div class="example-container">
+    <h2>To do</h2>
+  
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="tasks"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of tasks" cdkDrag>{{item.description}}</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Done</h2>
+  
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.description}}</div>
+    </div>
+  </div>
+  -->

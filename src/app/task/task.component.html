@@ -1,1 +1,19 @@
-<p>{{taskDescription}}</p>
+<div class="item">
+    <mat-card>
+      <mat-card-content>
+        <p>{{description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="action-btn">
+        <button aria-label="delete button" (click) = "deleteTodo(listId)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+        <div class="action-btn">
+        <button aria-label="edit button" (click) = "editTodo(listId)">
+          <app-edit-icon></app-edit-icon>
+        </button>
+      </div>  
+      </mat-card-actions>        
+    </mat-card>
+</div>

@@ -1,2 +1,23 @@
-.cardList{
+.list-container{
+    width: 360px;
+    max-width: 100%;
+    margin: 0 25px 25px 0;
+    display: inline-block;
+    vertical-align: top;
+    background-color: palegreen;
+    padding: 20px 10px;
+    border: 1px solid royalblue;
+    border-radius: 10px;
+    position: relative;
+    .list-title{
+        text-align: left;
+        font: normal 20px Arial, sans-serif;
+    }
+    .list-action{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 5px;
+    }
+    
 }

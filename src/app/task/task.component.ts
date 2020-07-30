@@ -7,11 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() taskDescription: string;
-  @Input() categoryId: number;
+  @Input() description: string;
+  @Input() listId: number;
   constructor() { }
 
   ngOnInit(): void {
+  }
+  editTodo(listId: number): void {
+    console.log(listId);
+  }
+
+  deleteTodo(listId: number): void {
+    console.log(listId);
   }
 
 }
