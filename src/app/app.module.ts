@@ -7,10 +7,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { TaskComponent } from './task/task.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddIconComponent } from './add-icon/add-icon.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EditIconComponent } from './edit-icon/edit-icon.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { CreateDialogComponent } from './create-dialog/create-dialog.component';
+import { ListactionsComponent } from './listactions/listactions.component';
+import { AddlistDialogComponent } from './addlist-dialog/addlist-dialog.component';
+import { EditlistDialogComponent } from './editlist-dialog/editlist-dialog.component';
+import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
+
 
 
 @NgModule({
@@ -19,15 +28,23 @@ import { EditIconComponent } from './edit-icon/edit-icon.component';
     CategoryListComponent,
     TaskComponent,
     AddIconComponent,
-    EditIconComponent
+    EditIconComponent,
+    EditDialogComponent,
+    DeleteDialogComponent,
+    CreateDialogComponent,
+    ListactionsComponent,
+    AddlistDialogComponent,
+    EditlistDialogComponent,
+    DeleteListDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

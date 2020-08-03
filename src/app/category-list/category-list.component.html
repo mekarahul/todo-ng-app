@@ -1,46 +1,26 @@
+<app-listactions (notifyAddList)=handleNewList()></app-listactions>
 <div cdkDropListGroup>
-<ng-container *ngFor="let category of list; let i = index">
-<div class="list-container" cdkDropList id="{{category.id}}" 
-[cdkDropListData] = "category.todos" (cdkDropListDropped)="drop($event)"
->
-    <h1><span class="list-title">{{category.title}}</span></h1>
-    <ng-container *ngFor="let todo of category.todos">
-        <app-task [description] = "todo.description" [listId] = "todo.listId" cdkDrag [cdkDragData]></app-task>
-    </ng-container>
-    <div class="list-action">        
-      <button mat-mini-fab color="warn" aria-label="plus icon">
-        <app-add-icon></app-add-icon>
-      </button>
+  <ng-container *ngFor="let category of list$ | async; index as i">
+    <div cdkDrag [cdkDragData] class="list-container" cdkDropList id="{{category.id}}"
+      [cdkDropListData]="category.todos" (cdkDropListDropped)="drop($event)">
+      <h1><span class="list-title">{{category.title}}</span>
+        <span>
+          <button (click)="editTodo(category.id)" mat-mini-fab color="warn" aria-label="edit list">
+            <app-edit-icon></app-edit-icon>
+          </button>
+          <button aria-label="delete button" (click) = "openDeleteListDialog(category.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span></h1>
+      <ng-container *ngFor="let todo of category.todos; let i=index">
+        <app-task (notifyDelete)="handleDelete()" id={{todo.id}} [description]="todo.description"
+          [listId]="todo.list_id" [task]="todo" cdkDrag [cdkDragData]></app-task>
+      </ng-container>
+      <div class="list-action">
+        <button (click)="addTodo(category.id)" mat-mini-fab color="warn" aria-label="plus icon">
+          <app-add-icon></app-add-icon>
+        </button>
+      </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
 </div>
-<!--
-<div class="example-container">
-    <h2>To do</h2>
-  
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="tasks"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of tasks" cdkDrag>{{item.description}}</div>
-    </div>
-  </div>
-
-  <div class="example-container">
-    <h2>Done</h2>
-  
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.description}}</div>
-    </div>
-  </div>
-  -->

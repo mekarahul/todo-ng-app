@@ -5,12 +5,12 @@
       </mat-card-content>
       <mat-card-actions>
         <div class="action-btn">
-        <button aria-label="delete button" (click) = "deleteTodo(listId)">
+        <button aria-label="delete button" (click) = "openDeleteDialog()">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
         <div class="action-btn">
-        <button aria-label="edit button" (click) = "editTodo(listId)">
+        <button aria-label="edit button" (click) = "openEditDialog()">
           <app-edit-icon></app-edit-icon>
         </button>
       </div>  

@@ -1,0 +1,4 @@
+<form novalidate [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+   <input formControlName="description" required />    
+  <button type="submit" [disabled]="!editTaskForm.valid">Save</button>
+</form>
