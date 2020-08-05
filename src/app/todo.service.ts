@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   handleError(error: HttpErrorResponse): Observable<any> {
     let errorMessage = 'Unknown error!';
@@ -26,14 +26,14 @@ export class TodoService {
     return throwError(errorMessage);
   }
 
-  getTodoList(): Observable<List[]>{
+  getTodoList(): Observable<List[]> {
     return this.http.get<List[]>(environment.listApi)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
   saveTodo(task: Task): Observable<Task> {
-    return this.http.put<Task>(environment.todoApi + task.id.toString(), {updateTodo: task})
+    return this.http.put<Task>(environment.todoApi + task.id.toString(), { updateTodo: task })
       .pipe(
         catchError(this.handleError)
       );
@@ -45,30 +45,47 @@ export class TodoService {
       );
   }
   newTodo(task: Task): Observable<Task> {
-    return this.http.post<Task>(environment.todoApi, {newTodo: task})
+    return this.http.post<Task>(environment.todoApi, { newTodo: task })
       .pipe(
         catchError(this.handleError)
       );
   }
 
   newList(list: List): Observable<List> {
-    return this.http.post<List>(environment.listApi, {list})
+    return this.http.post<List>(environment.listApi, { list })
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getListById(listId): Observable<List>{
+  getListById(listId): Observable<List> {
     return this.http.get<List>(environment.listApi + listId.toString());
   }
   saveList(list: List): Observable<List> {
-    return this.http.put<List>(environment.listApi + list.id.toString(), {updateList: list})
+    return this.http.put<List>(environment.listApi + list.id.toString(), { updateList: list })
       .pipe(
         catchError(this.handleError)
       );
   }
-  deleteList(listId: number): Observable<List>{
+  deleteList(listId: number): Observable<List> {
     return this.http.delete<List>(environment.listApi + listId.toString())
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  checkUniqueList(title: string): Observable<boolean> {
+    const options = title ?
+      { params: new HttpParams().set('title', title) } : {};
+    return this.http.get(environment.listApi + 'checkTodo', options)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  updateTodoStatus(todoId: number, listId: number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('id', todoId.toString());
+    params = params.append('listId', listId.toString());
+    return this.http.get(environment.todoApi + 'update', {params})
       .pipe(
         catchError(this.handleError)
       );

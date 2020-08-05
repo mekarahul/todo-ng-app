@@ -1,8 +1,10 @@
+import { UniqueTodoListService } from './../unique-todo-list.service';
 import { TodoService } from './../todo.service';
 import { Task } from './../task.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-create-dialog',
@@ -14,10 +16,12 @@ export class CreateDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public fb: FormBuilder, private todoService: TodoService) { }
+    public fb: FormBuilder, private todoService: TodoService,
+    private uniqueList: UniqueTodoListService
+    ) { }
   creatForm = this.fb.group(
     {
-      description: ["", Validators.required]
+      description: ["", Validators.required],
     }
   );
   ngOnInit(): void {}

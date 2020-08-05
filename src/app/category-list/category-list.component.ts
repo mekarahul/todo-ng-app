@@ -30,6 +30,9 @@ export class CategoryListComponent implements OnInit {
     console.log(categoryId);
   }
   drop(event: CdkDragDrop<string[]>): void {
+    const listId: number = parseInt(event.container.element.nativeElement.id);
+    const todoId: number = parseInt(event.item.element.nativeElement.id);
+    this.todoService.updateTodoStatus(todoId, listId).subscribe((res) => console.log(res));
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

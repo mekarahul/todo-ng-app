@@ -1,4 +1,5 @@
 <form novalidate [formGroup]="editListForm" (ngSubmit)="onSubmit()">
     <input formControlName="title" required />
-    <button type="submit" [disabled]="!editListForm.valid">Save</button>
-</form>
+    <p class="invalid" *ngIf="title.errors?.validateTitle">duplicate</p>    
+   <button type="submit" [disabled]="editListForm.pristine||editListForm.invalid">Save</button>
+ </form>
