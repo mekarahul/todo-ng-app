@@ -90,4 +90,10 @@ export class TodoService {
         catchError(this.handleError)
       );
   }
+  getAllTodo(){
+    return this.http.get(environment.todoApi)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
 }

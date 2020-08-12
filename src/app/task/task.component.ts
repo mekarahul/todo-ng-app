@@ -14,7 +14,7 @@ export class TaskComponent implements OnInit {
   @Input() description: string;
   @Input() listId: number;
   @Input() task: Task;
-  @Output() notifyDelete = new EventEmitter<number>();
+  @Output() notifyDelete = new EventEmitter<Task>();
   constructor(public dialog: MatDialog) {
   }
 
@@ -28,15 +28,14 @@ export class TaskComponent implements OnInit {
       width: '250px',
       data: this.task
     });
-    delDialogRef.afterClosed().subscribe((deleteId) => {
-      this.notifyDelete.emit();
+    delDialogRef.afterClosed().subscribe((todoId) => {
+      this.notifyDelete.emit(this.task);
     });
   }
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: '250px',
-      height: '200px',
       data: this.task
     }
     );

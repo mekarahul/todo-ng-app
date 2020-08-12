@@ -1,3 +1,4 @@
+import { NgRedux } from '@angular-redux/store';
 import { TodoService } from './../todo.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Task } from '../task.model';
@@ -23,7 +24,7 @@ export class DeleteDialogComponent implements OnInit {
   }
   deleteTask(): void{
     this.todoService.deleteTodo(this.task).subscribe((todo) => {
-      this.dialogRef.close(todo);
+      this.dialogRef.close(this.task);
     }
     );
   }

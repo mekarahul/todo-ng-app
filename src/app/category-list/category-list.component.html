@@ -1,6 +1,31 @@
 <app-listactions (notifyAddList)=handleNewList()></app-listactions>
+<input #description type=text (keyup)="test()" />
+<button (click)='test()'>Add Todo</button>
+<!--<ul *ngFor="let category of listItem;">
+  <li>
+    {{category.title}}
+    <ng-container *ngFor="let todo of todos | keyvalue" ;>
+      <ng-container *ngFor="let t of todo.value | keyvalue" ;>
+        <ng-container *ngIf="checkIfObject(t.value) === 'object'">
+          <ng-container *ngFor="let item of t.value | keyvalue">
+            <ng-container *ngIf="checkIfObject(item.value) === 'object'">
+
+              <ng-container *ngIf="item.value.listId === category.id">
+                {{item.value.description}}
+              </ng-container>
+
+
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </li>
+</ul>
+
+-->
 <div cdkDropListGroup>
-  <ng-container *ngFor="let category of list$ | async; index as i">
+  <ng-container *ngFor="let category of listItem">
     <div cdkDrag [cdkDragData] class="list-container" cdkDropList id="{{category.id}}"
       [cdkDropListData]="category.todos" (cdkDropListDropped)="drop($event)">
       <h1><span class="list-title">{{category.title}}</span>
@@ -8,14 +33,30 @@
           <button (click)="editTodo(category.id)" mat-mini-fab color="warn" aria-label="edit list">
             <app-edit-icon></app-edit-icon>
           </button>
-          <button aria-label="delete button" (click) = "openDeleteListDialog(category.id)">
+          <button aria-label="delete button" (click)="openDeleteListDialog(category.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </span></h1>
-      <ng-container *ngFor="let todo of category.todos; let i=index">
-        <app-task (notifyDelete)="handleDelete()" id={{todo.id}} [description]="todo.description"
-          [listId]="todo.list_id" [task]="todo" cdkDrag [cdkDragData]></app-task>
+      <ng-container *ngFor="let todo of todos | keyvalue" ;>
+
+        <ng-container *ngFor="let t of todo.value | keyvalue" ;>
+          <ng-container *ngIf="checkIfObject(t.value) === 'object'">
+
+            <ng-container *ngFor="let item of t.value | keyvalue">
+
+              <ng-container *ngIf="checkIfObject(item.value) === 'object'">
+                
+              <ng-container *ngIf="item.value.listId === category.id">                
+                <app-task (notifyDelete)="handleDelete(item)" id={{item.value.id}} [description]="item.value.description"
+                  [listId]="item.value.listId" [task]="item.value" cdkDrag [cdkDragData]></app-task>
+              </ng-container>
+
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
       </ng-container>
+
       <div class="list-action">
         <button (click)="addTodo(category.id)" mat-mini-fab color="warn" aria-label="plus icon">
           <app-add-icon></app-add-icon>

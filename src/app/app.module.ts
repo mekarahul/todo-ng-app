@@ -1,3 +1,4 @@
+
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,8 +20,10 @@ import { ListactionsComponent } from './listactions/listactions.component';
 import { AddlistDialogComponent } from './addlist-dialog/addlist-dialog.component';
 import { EditlistDialogComponent } from './editlist-dialog/editlist-dialog.component';
 import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
-
-
+import { NgRedux, NgReduxModule } from '@angular-redux/store';
+import rootReducer from './store/reducers/todoReducer';
+import {initialState} from './store/reducers/todoReducer';
+import {IAppState} from './store/reducers/todoReducer';
 
 @NgModule({
   declarations: [
@@ -44,9 +47,14 @@ import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dial
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgReduxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>){
+    ngRedux.configureStore(rootReducer, initialState);
+  }
+}
