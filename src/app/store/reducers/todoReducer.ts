@@ -45,27 +45,22 @@ export const todos = {
 export default function todoReducer(state = todos, action) {
     switch (action.type) {
         case ADD_TODO:
-            const newTodo = {
-                id: state.allTodoIds[state.allTodoIds.length - 1] + 1,
-                description: action.payload.description,
-                listId: action.payload.listId
-            }
-            console.log("add todo called", newTodo);
-            if (state['listId' + newTodo.listId] !== undefined) {
+            console.log("add todo called", action.payload);
+            if (state['listId' + action.payload.listId] !== undefined) {
                 return {
                     ...state,
-                    ['listId' + newTodo.listId]: {
-                        ...state['listId' + newTodo.listId], ['todoId' + newTodo.id]: newTodo
+                    ['listId' + action.payload.listId]: {
+                        ...state['listId' + action.payload.listId], ['todoId' + action.payload.id]: action.payload
                     },
-                    allTodoIds: [...state.allTodoIds].concat(newTodo.id),
+                    allTodoIds: [...state.allTodoIds].concat(action.payload.id),
                 }
             } else {
                 return {
                     ...state,
-                    ['listId' + newTodo.listId]: {
-                        ...state['listId' + newTodo.listId], ['todoId' + newTodo.id]: newTodo,
+                    ['listId' + action.payload.listId]: {
+                        ...state['listId' + action.payload.listId], ['todoId' + action.payload.id]: action.payload,
                     },
-                    allTodoIds: state.allTodoIds.concat(newTodo.id),
+                    allTodoIds: state.allTodoIds.concat(action.payload.id),
                 }
             }
         case DELETE_TODO:

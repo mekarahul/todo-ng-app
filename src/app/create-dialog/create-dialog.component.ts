@@ -32,8 +32,10 @@ export class CreateDialogComponent implements OnInit {
   onSubmit(): void{
     const newTodo: Task = new Task(this.creatForm.value.description, this.data.listId);
     this.todoService.newTodo(newTodo).subscribe(
-      (res) => {
-        this.dialogRef.close(newTodo);
+      (res: any) => {
+        newTodo.id = res.newTodo.todo;
+        this.ngRedux.dispatch(addTodoToList(newTodo));
+        this.dialogRef.close(res);
       }
     );
   }

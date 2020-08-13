@@ -81,7 +81,7 @@ export class CategoryListComponent implements OnInit {
       data: { listId }
     });
     addDialogRef.afterClosed().subscribe((res) => {
-      this.ngRedux.dispatch(addTodoToList(res));
+      console.log(res);      
     });
   }
 
