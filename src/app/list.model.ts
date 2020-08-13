@@ -1,4 +1,7 @@
+import { schema } from 'normalizr';
+
 import { Task } from './task.model';
+
 export class List {
     id: number;
     title: string;
@@ -7,3 +10,5 @@ export class List {
         this.title = title;
     }
 }
+
+export const listSchema = new schema.Entity('List');

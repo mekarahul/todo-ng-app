@@ -1,5 +1,5 @@
 import { Task } from './../task.model';
-import { IAppState } from './../store/reducers/todoReducer';
+import { IAppState } from './../store/reducers/rootReducer';
 
 import { DeleteListDialogComponent } from './../delete-list-dialog/delete-list-dialog.component';
 import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.component';
@@ -12,7 +12,8 @@ import { List } from './../list.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TodoService } from './../todo.service';
-import { loadTodos } from './../store/actions/todo-actions';
+import { LoadTodoList } from './../store/actions/todo-actions';
+import { loadList } from './../store/actions/list-actions';
 import _ from 'lodash';
 import { deleteTodo } from './../store/actions/todo-actions';
 
@@ -32,25 +33,23 @@ export class CategoryListComponent implements OnInit {
 
   constructor(private todoService: TodoService, private dialog: MatDialog, private ngRedux: NgRedux<IAppState>) { }
   ngOnInit(): void {
-    /*this.todoService.getTodoList().subscribe((list) => {
-      this.ngRedux.dispatch(LoadTodoList(list));
+    this.todoService.getTodoList().subscribe((list) => {
+      this.ngRedux.dispatch(loadList(list));
     });
-    */
-    /*this.todoService.getAllTodo().subscribe((Todos) => {
-      this.ngRedux.dispatch(loadTodos(Todos));
-    });*
-    this.ngRedux.subscribe(() => this.readState());
-    this.readState();
+    this.todoService.getTodoList().subscribe((Todos) => {
+      this.ngRedux.dispatch(LoadTodoList(Todos));
+    });
+    
     console.log(this.ngRedux.getState());
-    */
+    
     this.ngRedux.subscribe(() => this.readState());
     this.readState();
   }
 
   readState(): void {
     const state: any = this.ngRedux.getState() as IAppState;
-    this.listItem = state.entities.list;
-    this.todos = state.entities.todos;
+    this.listItem = state.list;
+    this.todos = state.todos;
     this.listItem = _.values(this.listItem);
     this.todos = Object.entries(this.todos);
   }

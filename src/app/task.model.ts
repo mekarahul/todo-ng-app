@@ -1,3 +1,5 @@
+import { schema } from 'normalizr';
+
 export class Task {
     id: number;
     description: string;
@@ -7,4 +9,6 @@ export class Task {
         this.description = description;
         this.listId = listId;
     }
+
 }
+export const taskSchema = new schema.Entity('Task');

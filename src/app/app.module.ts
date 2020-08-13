@@ -21,9 +21,9 @@ import { AddlistDialogComponent } from './addlist-dialog/addlist-dialog.componen
 import { EditlistDialogComponent } from './editlist-dialog/editlist-dialog.component';
 import { DeleteListDialogComponent } from './delete-list-dialog/delete-list-dialog.component';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
-import rootReducer from './store/reducers/todoReducer';
-import {initialState} from './store/reducers/todoReducer';
-import {IAppState} from './store/reducers/todoReducer';
+import {initialState} from './store/reducers/rootReducer';
+import {IAppState} from './store/reducers/rootReducer';
+import rootReducer from './store/reducers/rootReducer'
 
 @NgModule({
   declarations: [
