@@ -31,24 +31,10 @@ export class CreateDialogComponent implements OnInit {
   ngOnInit(): void {}
   onSubmit(): void{
     const newTodo: Task = new Task(this.creatForm.value.description, this.data.listId);
-    this.ngRedux.dispatch(addTodoToList(newTodo));
-    this.dialogRef.close();
-    /*this.todoService.newTodo(newTodo).subscribe(
-      (res) => {
-        this.dialogRef.close(res);
-      }
-    );*/
-  }
-/*
-  addTodo(): void {
-    const newTodo: Task = new Task(this.creatForm.value.description, this.data.listId);
-    console.log(this.data.listId);
-    console.log(newTodo);
-    this.ngRedux.dispatch(addTodoToList(newTodo));
     this.todoService.newTodo(newTodo).subscribe(
       (res) => {
-        this.dialogRef.close(res);
+        this.dialogRef.close(newTodo);
       }
     );
-  }*/
+  }
 }

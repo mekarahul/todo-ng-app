@@ -20,11 +20,11 @@ export class EditlistDialogComponent implements OnInit {
     private uniqueTodoListService: UniqueTodoListService
   ) { }
 
-  get title(): AbstractControl{
+  get title(): AbstractControl {
     return this.editListForm.get('title');
   }
-  
-  createForm(): void{
+
+  createForm(): void {
     this.editListForm = this.fb.group(
       {
         title: ['', Validators.required, this.uniqueTodoListService.checkForUniqueList()]
@@ -34,8 +34,7 @@ export class EditlistDialogComponent implements OnInit {
     if (this.editListForm.valid) {
       this.list.title = this.editListForm.value.title;
       this.todoService.saveList(this.list).subscribe((list) => {
-        this.list = list;
-        this.dialogRef.close();
+        this.dialogRef.close(this.list);
       });
     }
   }

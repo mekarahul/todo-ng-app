@@ -20,7 +20,8 @@ export class DeleteListDialogComponent implements OnInit {
   deleteList(listId): void{
     this.todoService.deleteList(listId).subscribe(
       (res) => {
-        this.dialogRef.close(res);
+        console.log(res);
+        this.dialogRef.close(listId);
       }
     );
   }

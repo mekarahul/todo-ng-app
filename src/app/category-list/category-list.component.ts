@@ -12,10 +12,12 @@ import { List } from './../list.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TodoService } from './../todo.service';
-import { LoadTodoList } from './../store/actions/todo-actions';
+import { LoadTodoList, addTodoToList } from './../store/actions/todo-actions';
 import { loadList } from './../store/actions/list-actions';
 import _ from 'lodash';
 import { deleteTodo } from './../store/actions/todo-actions';
+import { deleteList } from './../store/actions/list-actions';
+import { editList} from './../store/actions/list-actions';
 
 
 @Component({
@@ -79,15 +81,11 @@ export class CategoryListComponent implements OnInit {
       data: { listId }
     });
     addDialogRef.afterClosed().subscribe((res) => {
-      //this.list$ = this.todoService.getTodoList();
+      this.ngRedux.dispatch(addTodoToList(res));
     });
   }
 
-  handleNewList(): void {
-    //this.list$ = this.todoService.getTodoList();
-  }
-
-  editTodo(listId): void {
+  editList(listId): void {
     this.todoService.getListById(listId).subscribe((item) => {
       this.list = item;
       const editListDialogRef = this.dialog.open(EditlistDialogComponent, {
@@ -95,7 +93,7 @@ export class CategoryListComponent implements OnInit {
         data: this.list
       });
       editListDialogRef.afterClosed().subscribe((res) => {
-        //this.list$ = this.todoService.getTodoList();
+        this.ngRedux.dispatch(editList(res));
       });
     }
     );
@@ -106,7 +104,7 @@ export class CategoryListComponent implements OnInit {
       data: { id: listId }
     });
     delListDialogRef.afterClosed().subscribe((res) => {
-      //this.list$ = this.todoService.getTodoList();
+      this.ngRedux.dispatch(deleteList(res));
     });
   }
 

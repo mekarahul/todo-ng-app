@@ -1,7 +1,7 @@
 import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.component';
 import { Task } from './../task.model';
 import { EditDialogComponent, } from './../edit-dialog/edit-dialog.component';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

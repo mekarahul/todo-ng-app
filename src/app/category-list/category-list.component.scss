@@ -9,9 +9,18 @@
     border: 1px solid royalblue;
     border-radius: 10px;
     position: relative;
+    h1{
+        background-color: ivory;
+        padding: 5px;
+        border: 1px solid brown;
+        border-radius:3px;
+    }
     .list-title{
         text-align: left;
         font: normal 20px Arial, sans-serif;
+        width: 75%;
+        display:inline-block;
+        
     }
     .list-action{
         position: absolute;

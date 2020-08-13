@@ -46,23 +46,29 @@ export default function todoReducer(state = todos, action) {
     switch (action.type) {
         case ADD_TODO:
             const newTodo = {
-                id: todos.allTodoIds[todos.allTodoIds.length - 1] + 1,
+                id: state.allTodoIds[state.allTodoIds.length - 1] + 1,
                 description: action.payload.description,
                 listId: action.payload.listId
             }
+            console.log("add todo called", newTodo);
             if (state['listId' + newTodo.listId] !== undefined) {
                 return {
                     ...state,
                     ['listId' + newTodo.listId]: {
                         ...state['listId' + newTodo.listId], ['todoId' + newTodo.id]: newTodo
                     },
-                    allTodoIds: {
-                        ...[state.allTodoIds], ...[newTodo.id]
-                    }
+                    allTodoIds: [...state.allTodoIds].concat([newTodo.id]),
+                }
+            } else {
+                return {
+                    ...state,
+                    ['listId' + newTodo.listId]: {
+                        ...state['listId' + newTodo.listId], ['todoId' + newTodo.id]: newTodo,
+                    },
+                    allTodoIds: [...state.allTodoIds].concat([newTodo.id]),
                 }
             }
         case DELETE_TODO:
-            console.log("delete wala",action);
             return {
                 ...state,
                 ['listId' + action.payload.value.listId]: {
@@ -70,7 +76,6 @@ export default function todoReducer(state = todos, action) {
                 }
             }
         case LOAD_TODOS:
-            console.log("load_list", action);
             return {
                 ...state, ...loadDataToTodos(action.payload),
             }
@@ -81,13 +86,17 @@ export default function todoReducer(state = todos, action) {
 
 function loadDataToTodos(data: any): object {
     let topWrapper = {}
+    let allTodoIds = [];
     data.map(list => {
         const prefix = 'listId';
         topWrapper['listId' + list.id] = {};
         list.todos.map(todo => {
             topWrapper['listId' + list.id]['todoId' + todo.id] = todo;
+            allTodoIds.push(todo.id);
         });
     });
+    topWrapper['allTodoIds'] = allTodoIds;
+    console.log("topWrapper", topWrapper);
     return topWrapper;
 }
 function deletePropretyObj(obj, ele) {
