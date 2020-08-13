@@ -57,7 +57,7 @@ export default function todoReducer(state = todos, action) {
                     ['listId' + newTodo.listId]: {
                         ...state['listId' + newTodo.listId], ['todoId' + newTodo.id]: newTodo
                     },
-                    allTodoIds: [...state.allTodoIds].concat([newTodo.id]),
+                    allTodoIds: [...state.allTodoIds].concat(newTodo.id),
                 }
             } else {
                 return {
@@ -65,7 +65,7 @@ export default function todoReducer(state = todos, action) {
                     ['listId' + newTodo.listId]: {
                         ...state['listId' + newTodo.listId], ['todoId' + newTodo.id]: newTodo,
                     },
-                    allTodoIds: [...state.allTodoIds].concat([newTodo.id]),
+                    allTodoIds: state.allTodoIds.concat(newTodo.id),
                 }
             }
         case DELETE_TODO:
